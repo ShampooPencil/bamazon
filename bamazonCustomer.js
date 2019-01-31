@@ -1,5 +1,48 @@
 
+const inquirer = require('inquirer');
+const mysql = require('mysql');
+//require('console.table');
+const Connection = mysql.createConnection({
+    host: 'localhost',
+    port: 3306,
+    user: 'root',
+    password: '',
+    database: 'bamazon'
+});
+Connection.connect(function(err){
+    if(err)
+    console.log(err)
+else
+    console.table(res);
+displayProducts();
+}) //is a err first callback
 console.log("testing");
+const displayProducts = function(){
+    Connection.query('SELECT * FROM products', function(err, res){
+        if(err)
+            console.log(err)
+        else
+            console.table(res);
+    })
+}
+//inquirer.prompt([
+    //     {
+    //         name: 'my_name',
+    //         type: 'input',
+    //         message: 'What is your name: '
+    //     }, 
+    // {
+    //     name: 'icecream_Y_N',
+    //     type: 'confirm',
+    //     message: 'Do you like Icecream'
+    // }]).then(answers => {  //=> same as wrote 'function' shortcut or shorthand of function
+    //                 console.log("Your name is:"+answers.my_name);
+    //                 console.log("Do you like Icecream? " + answers.icecream_Y_N);
+
+    //         });
+
+
+
 // Challenge #1: Customer View (Minimum Requirement)
 
 
@@ -18,7 +61,11 @@ console.log("testing");
 
 
 // Populate this database with around 10 different products. (i.e. Insert "mock" data rows into this database and table).
-// Then create a Node application called bamazonCustomer.js. Running this application will first display all of the items available for sale. Include the ids, names, and prices of products for sale.
+
+// Then create a Node application called bamazonCustomer.js. Running this application will 
+//first display all of the items available for sale. Include the ids, names, and prices of
+// products for sale.
+
 // The app should then prompt users with two messages.
 
 // The first should ask them the ID of the product they would like to buy.
